@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Player
+  - Ground
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: BG
     uniqueID: 1770432869
+    locked: 0
+  - name: Saw
+    uniqueID: 3770697663
     locked: 0
   - name: World
     uniqueID: 344079655
