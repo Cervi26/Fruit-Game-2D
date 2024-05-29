@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
                     //Esta linea se encarga del salto, funciona exactamente igual que la de andar, pero aplicamos velocidad al eje x,
                     //de esta forma se mueve hacia arriba y parece que salta. (además se multiplica * la fuerza de salto que se le de en unity)
                     RigidB.velocity = new Vector2(RigidB.velocity.x, jumpForce);
+                    AudioManager.instance.PlaySFX(2);
 
                 }
                 else //Si no, hace esto otro:
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
                     if (canDoubleJump)//Si la variable de doble salto está activa:
                     {
                         RigidB.velocity = new Vector2(RigidB.velocity.x, jumpForce); //Vuelve a dejar dar un salto, para tener el doble salto del player
+                        AudioManager.instance.PlaySFX(2);
                         canDoubleJump = false; //Después de dar el segundo salto, esta variable, se desactiva para evitar que se siga saltando, hasta que no se toque el suelo de nuevo.
                     }
                 }

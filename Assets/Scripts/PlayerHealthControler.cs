@@ -13,6 +13,8 @@ public class PlayerHealthControler : MonoBehaviour
 
     private SpriteRenderer theSR;
 
+    public GameObject deathEffect;
+
     private void Awake()
     {
           Instance = this;
@@ -47,12 +49,15 @@ public class PlayerHealthControler : MonoBehaviour
         if (invicibleCounter <= 0)
         {
             currentHealth--; //Con el simbolo --, reducimos la vida al verlo.
+            AudioManager.instance.PlaySFX(4);
 
             if (currentHealth <= 0) // aqui estamos diciemdo que si no tenemos vidas y nos quitan una empezamos de nuevo.
             {
                 currentHealth = 0;
 
-                gameObject.SetActive(false); // hacemos lo inicial para poder hacerle daño al jugador.
+                Instantiate(deathEffect, PlayerController.instance.transform.position, PlayerController.instance.transform.rotation);
+
+                LevelManager.instance.RespawnPlayer();
             }
 
             else 
@@ -66,5 +71,17 @@ public class PlayerHealthControler : MonoBehaviour
 
             UIController.instance.UpdaterHealthDisplay();
         }
+    }
+
+    public void HealPlayer()
+    {
+        currentHealth++;
+
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        UIController.instance.UpdaterHealthDisplay();
     }
 }

@@ -11,7 +11,9 @@ public class UIController : MonoBehaviour
 
     public Image heart1, heart2, heart3; //Hacemos referencia a las imagenes.
 
-    public Sprite heartFull, heartEmpty, heartHalf; //Hacemos referencia a las vidas.
+    public Sprite heartFull, heartEmpty; //Hacemos referencia a las vidas.
+
+    public Text AppleText, CherriesText, MelonText;
 
     private void Awake() //declaramos la instancia
     {
@@ -21,6 +23,9 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       UpdateAppleCount();
+       UpdateCherriesCount();
+       UpdateMelonCount();
 
     }
 
@@ -71,6 +76,24 @@ public class UIController : MonoBehaviour
 
                 break;
         }
+    }
+
+    public void UpdateAppleCount() // Tenemos que llamar a esta funcion cada vez que cogemos una fruta y para ello lo debemos de hacer desde Pickup.
+    {
+        AppleText.text = LevelManager.instance.appleCollected.ToString(); // Lo que hacemos mencion del LevelManager para poder coger de aqui la linea de codigo para el text del contador.
+
+    }
+
+    public void UpdateCherriesCount() // Tenemos que llamar a esta funcion cada vez que cogemos una fruta y para ello lo debemos de hacer desde Pickup.
+    {
+        CherriesText.text = LevelManager.instance.cherriesCollected.ToString(); // Lo que hacemos mencion del LevelManager para poder coger de aqui la linea de codigo para el text del contador.
+
+    }
+
+    public void UpdateMelonCount() // Tenemos que llamar a esta funcion cada vez que cogemos una fruta y para ello lo debemos de hacer desde Pickup.
+    {
+        MelonText.text = LevelManager.instance.melonCollected.ToString(); // Lo que hacemos mencion del LevelManager para poder coger de aqui la linea de codigo para el text del contador.
+
     }
 }
 
