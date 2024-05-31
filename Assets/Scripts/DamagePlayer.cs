@@ -17,12 +17,12 @@ public class DamagePlayer : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other) // Aqui hacemos que poder hacer la colicion.
+    private void OnTriggerEnter2D(Collider2D other) //Se ejecuta cuando el player, colisiona contra este objeto
 
     {
         if (other.tag == "Player")
         {
-            PlayerHealthControler.Instance.DealDamage();
+            PlayerHealthControler.Instance.DealDamage(); //Cada vez que se ejecuta, se llama a la función de DealDamage que se encarga de dañar al player
         }
     }
 }

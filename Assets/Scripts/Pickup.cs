@@ -4,67 +4,70 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    // De esta manera definimos de que tipo es nuetro pikup
     public bool isApple;
     public bool isCherries;
-    public bool isMelon;      // De esta manera definimos si nuetro pickup es de tipo fruta.
-    
+    public bool isMelon;     
     public bool isHeal;
 
-    private bool isCollected; // Hacemos un booleano.
+    private bool isCollected; // Hacemos un booleano para saber si está o no recolectado
 
-    public GameObject pickupEffect;
+    public GameObject pickupEffect; //Se usa para el efecto de recoger items por el mapa
 
 
+    //Se ejecuta cuando el player, choca contra este objeto con trigger
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.CompareTag("Player") && !isCollected) // Por si no ha sido recolectada.
+        if (other.CompareTag("Player") && !isCollected) // Verifica que sea el player y que no ha sido recolectada.
         {
-            if (isApple)
+            if (isApple) //Si es manzana
             {
-                LevelManager.instance.appleCollected++; // Hacemos el conteo de las frutas.
+                LevelManager.instance.appleCollected++; // Hacemos el conteo de manzanas
 
-                UIController.instance.UpdateAppleCount(); // Aqui llamamos a la instancia cada vez que cogemos una fruta.
-                AudioManager.instance.PlaySFX(0);
+                UIController.instance.UpdateAppleCount(); // Aqui actualizamos el contador de las manzanas
+                AudioManager.instance.PlaySFX(0); //Se pone el efecto de sonido de recoger items
 
 
-                Instantiate(pickupEffect, transform.position, transform.rotation);
+                Instantiate(pickupEffect, transform.position, transform.rotation); //Se indica en que position saldrá el efecto de recoger items
 
-                isCollected = true;
+                isCollected = true; //Se pone como recogida la fruta
                 Destroy(gameObject); // Destruimos la fruta una vez cogida.
             }
 
+            //Funciona de la misma manera en cada fruta. (Cada una tiene su propio contador)
             if (isCherries)
             {
-                LevelManager.instance.cherriesCollected++; // Hacemos el conteo de las frutas.
+                LevelManager.instance.cherriesCollected++; 
 
-                UIController.instance.UpdateCherriesCount(); // Aqui llamamos a la instancia cada vez que cogemos una fruta.
+                UIController.instance.UpdateCherriesCount();
                 AudioManager.instance.PlaySFX(0);
 
                 Instantiate(pickupEffect, transform.position, transform.rotation);
 
                 isCollected = true;
-                Destroy(gameObject); // Destruimos la fruta una vez cogida.
+                Destroy(gameObject); 
             }
 
             if (isMelon)
             {
-                LevelManager.instance.melonCollected++; // Hacemos el conteo de las frutas.
+                LevelManager.instance.melonCollected++; 
 
-                UIController.instance.UpdateMelonCount(); // Aqui llamamos a la instancia cada vez que cogemos una fruta.
+                UIController.instance.UpdateMelonCount(); 
                 AudioManager.instance.PlaySFX(0);
 
                 Instantiate(pickupEffect, transform.position, transform.rotation);
 
                 isCollected = true;
-                Destroy(gameObject); // Destruimos la fruta una vez cogida.
+                Destroy(gameObject); 
             }
 
             if (isHeal)
             {
+                //Si la vida del player es distintas a la máxima (es decir no tiene toda la vida), hace los siguiente:
                 if (PlayerHealthControler.Instance.currentHealth != PlayerHealthControler.Instance.maxHealth)
                 {
-                    PlayerHealthControler.Instance.HealPlayer();
-                    AudioManager.instance.PlaySFX(1);
+                    PlayerHealthControler.Instance.HealPlayer(); //Llama a la función de curar al layer
+                    AudioManager.instance.PlaySFX(1); //Pone el efecto de sonido de curación
 
                     isCollected = true;
                     Destroy(gameObject);
